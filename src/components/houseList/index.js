@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {SafeAreaView, Dimensions} from 'react-native';
@@ -20,7 +22,10 @@ const HouseList = () => {
   const houses = useSelector(state => state.data);
   const dispatch = useDispatch();
 
+  console.log(houses);
+
   const renderItem = ({item}) => {
+    console.log('rr');
     return (
       <ItemWrapper>
         <Image source={{uri: item}} />
@@ -28,20 +33,12 @@ const HouseList = () => {
     );
   };
 
-  const hanldleLike = d => {
-    const house = {...d, liked: !d.liked};
-    // TODO: Performance, whe update all state so we re-render all items and
-    // we dont want it...
-    const data = houses.map(da => (da.id === d.id ? house : da));
-
-    dispatch({type: 'ADD_FAVORITE', data});
+  const handleLike = index => {
+    dispatch({type: 'ADD_FAVORITE', index});
   };
 
-  const hanldlePagination = (d, index) => {
-    const house = {...d, current_pagination: index};
-    // TODO: Performance
-    const data = houses.map(da => (da.id === d.id ? house : da));
-
+  const handlePagination = (pos, index) => {
+    const data = {index, pagination: pos};
     dispatch({type: 'CHANGE_PAGINATION', data});
   };
 
@@ -69,9 +66,7 @@ const HouseList = () => {
 
   return (
     <SafeAreaView>
-      {houses.map((data, index) => {
-        console.log(data);
-
+      {Object.entries(houses).map(([index, data]) => {
         return (
           <PostWrapper key={index}>
             <Carousel
@@ -82,10 +77,26 @@ const HouseList = () => {
               layout={'default'}
               activeSlideAlignment={'start'}
               containerCustomStyle={{paddingLeft: 10}}
-              onSnapToItem={pos => hanldlePagination(data, pos)}
+              onSnapToItem={pos => handlePagination(pos, index)}
             />
             <Block>
-              <RenderPagination entries={data} />
+              <Pagination
+                dotsLength={data.pictures.length}
+                activeDotIndex={data.current_pagination}
+                containerStyle={{
+                  height: 65,
+                }}
+                dotStyle={{
+                  borderRadius: 5,
+                }}
+                inactiveDotStyle={
+                  {
+                    // Define styles for inactive dots here
+                  }
+                }
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={0.6}
+              />
             </Block>
             <PostFooter>
               <Block>
@@ -95,7 +106,8 @@ const HouseList = () => {
               <Icon
                 name={data.liked ? 'heart' : 'hearto'}
                 size={20}
-                onPress={() => hanldleLike(data)}
+                color={data.liked ? '#6c5ce7' : 'black'}
+                onPress={() => handleLike(index)}
               />
             </PostFooter>
           </PostWrapper>
