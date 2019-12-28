@@ -22,12 +22,20 @@ const HouseList = () => {
   const houses = useSelector(state => state.data);
   const dispatch = useDispatch();
 
-  console.log(houses);
-
   const renderItem = ({item}) => {
-    console.log('rr');
     return (
-      <ItemWrapper>
+      <ItemWrapper
+        style={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 1.41,
+
+          elevation: 2,
+        }}>
         <Image source={{uri: item}} />
       </ItemWrapper>
     );
