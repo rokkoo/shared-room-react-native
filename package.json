@@ -10,9 +10,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.5",
+    "@react-navigation/core": "^5.0.0-alpha.29",
+    "@react-navigation/native": "^5.0.0-alpha.21",
+    "@react-navigation/stack": "^5.0.0-alpha.46",
     "react": "16.9.0",
     "react-icons": "^3.8.0",
     "react-native": "0.61.5",
+    "react-native-gesture-handler": "^1.5.2",
+    "react-native-reanimated": "^1.4.0",
+    "react-native-safe-area-context": "^0.6.1",
+    "react-native-screens": "^2.0.0-alpha.22",
     "react-native-snap-carousel": "^3.8.4",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.1.3",

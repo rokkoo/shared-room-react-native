@@ -22,6 +22,7 @@ export const Text = styled.Text`
   font-size: ${props => (props.big ? 20 : 16)}px;
   opacity: ${props => (props.big ? 1 : 0.5)};
   font-weight: ${props => (props.big ? 600 : 400)};
+  color: #636e72;
 `;
 
 export const ItemWrapper = styled.View`
