@@ -27,11 +27,20 @@ const HouseList = ({navigation}) => {
   const houses = useSelector(state => state.data);
   const dispatch = useDispatch();
 
-  const nav = () => navigation.navigate('Information');
+  const nav = item => navigation.navigate('Information', item);
 
-  const renderItem = ({item}) => {
+  const handleLike = index => {
+    dispatch({type: 'ADD_FAVORITE', index});
+  };
+
+  const handlePagination = (pos, index) => {
+    const data = {index, pagination: pos};
+    dispatch({type: 'CHANGE_PAGINATION', data});
+  };
+
+  const renderItem = ({item, data}) => {
     return (
-      <TouchableOpacity onPress={nav} activeOpacity={1}>
+      <TouchableOpacity onPress={() => nav(data)} activeOpacity={1}>
         <ItemWrapper
           style={{
             shadowColor: '#000',
@@ -50,15 +59,6 @@ const HouseList = ({navigation}) => {
     );
   };
 
-  const handleLike = index => {
-    dispatch({type: 'ADD_FAVORITE', index});
-  };
-
-  const handlePagination = (pos, index) => {
-    const data = {index, pagination: pos};
-    dispatch({type: 'CHANGE_PAGINATION', data});
-  };
-
   return (
     <SafeAreaView>
       <ScrollView>
@@ -67,7 +67,7 @@ const HouseList = ({navigation}) => {
             <PostWrapper key={index}>
               <Carousel
                 data={data.pictures}
-                renderItem={renderItem}
+                renderItem={({item}) => renderItem({item, data})}
                 sliderWidth={screenWidth}
                 itemWidth={screenWidth / 3}
                 layout={'default'}
