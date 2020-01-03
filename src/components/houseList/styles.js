@@ -9,7 +9,7 @@ export const PostWrapper = styled.View`
 
 export const PostFooter = styled.View`
   flex-direction: row;
-  padding: 10px;
+  padding: 20px 10px;
   align-items: center;
   justify-content: space-between;
 `;
@@ -22,7 +22,7 @@ export const Text = styled.Text`
   font-size: ${props => (props.big ? 20 : 16)}px;
   opacity: ${props => (props.big ? 1 : 0.5)};
   font-weight: ${props => (props.big ? 600 : 400)};
-  color: #636e72;
+  color: #34495e;
 `;
 
 export const ItemWrapper = styled.View`

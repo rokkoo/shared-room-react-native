@@ -23,24 +23,23 @@ const HouseList = ({navigation}) => {
   const dispatch = useDispatch();
 
   const nav = () => navigation.navigate('Information');
+
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity onPress={nav}>
-        <ItemWrapper
-          style={{
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.2,
-            shadowRadius: 1.41,
+      <ItemWrapper
+        style={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 1.41,
 
-            elevation: 2,
-          }}>
-          <Image source={{uri: item}} />
-        </ItemWrapper>
-      </TouchableOpacity>
+          elevation: 2,
+        }}>
+        <Image source={{uri: item}} />
+      </ItemWrapper>
     );
   };
 
@@ -116,10 +115,27 @@ const HouseList = ({navigation}) => {
               />
             </Block>
             <PostFooter>
-              <Block>
-                <Text>{data.user}</Text>
-                <Text big>{data.location_name}</Text>
-              </Block>
+              <TouchableOpacity onPress={nav}>
+                <Block
+                  style={{
+                    backgroundColor: '#2ecc71',
+                    borderRadius: 6,
+                    padding: 7,
+                  }}>
+                  <Block
+                    style={{
+                      flexDirection: 'row',
+                      color: '#34495e',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text>{data.user}</Text>
+                    <Text style={{paddingLeft: 5}}>
+                      <Icon name="arrowright" size={20} />
+                    </Text>
+                  </Block>
+                  <Text big>{data.location_name}</Text>
+                </Block>
+              </TouchableOpacity>
               <Icon
                 name={data.liked ? 'heart' : 'hearto'}
                 size={20}
